@@ -1,3 +1,5 @@
 .DS_Store
 playground
 __pycache__
+data
+logs
