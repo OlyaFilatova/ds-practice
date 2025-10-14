@@ -1,10 +1,16 @@
+"""Infer the animal class from an image using a pre-trained ResNet model."""
 from pathlib import Path
-import torch
-from torchvision import models, transforms
+import logging
+import json
+
 from PIL import Image
+import torch
+from torchvision import models
 
+from .preprocessing import transform
 
-CLASS_NAMES = ["butterfly", "cat", "chicken", "cow", "dog", "elephant", "horse", "sheep", "spider", "squirrel"]
+CLASS_NAMES = ["butterfly", "cat", "chicken", "cow", "dog", "elephant",
+               "horse", "sheep", "spider", "squirrel"]
 
 BASE_DIR = Path(__file__).resolve().parent
 MODEL_PATH = BASE_DIR / "../models/vision/model_resnet_animals.pth"
@@ -15,19 +21,35 @@ model.fc = torch.nn.Linear(model.fc.in_features, len(CLASS_NAMES))
 model.load_state_dict(torch.load(MODEL_PATH, map_location="cpu"))
 model.eval()
 
-# preprocessing
-transform = transforms.Compose([
-    transforms.Resize((224, 224)),
-    transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                         std=[0.229, 0.224, 0.225])
-])
+# Replace logging with structured JSON logging
+logging.basicConfig(level=logging.INFO, format='%(message)s')
+
+def log_as_json(message, **kwargs):
+    """Log a message with additional context as a JSON object."""
+    logging.info(json.dumps({"message": message, **kwargs}))
 
 def classify_animal(image_path: str):
+    """
+    Classify the animal in the given image.
+
+    Args:
+        image_path (str): Path to the image file.
+
+    Returns:
+        str: Predicted animal class name.
+
+    Example:
+        Input:
+            image_path = "test_images/dog/0003.jpeg"
+        Output:
+            "dog"
+    """
+    log_as_json("Classifying animal", image_path=image_path)
     img = Image.open(image_path).convert("RGB")
     img_tensor = transform(img).unsqueeze(0)
     with torch.no_grad():
         pred = model(img_tensor).argmax(1).item()
+    log_as_json("Predicted class", class_name=CLASS_NAMES[pred])
     return CLASS_NAMES[pred]
 
 if __name__ == "__main__":

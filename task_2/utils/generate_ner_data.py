@@ -1,14 +1,24 @@
+"""Generate synthetic NER data with various templates and structures."""
 import json
+import logging
 import random
 from pathlib import Path
 import re
+
+# Replace logging with structured JSON logging
+logging.basicConfig(level=logging.INFO, format='%(message)s')
+
+def log_as_json(message, **kwargs):
+    """Log messages in JSON format."""
+    logging.info(json.dumps({"message": message, **kwargs}))
 
 # ========== CONFIG ==========
 BASE_DIR = Path(__file__).resolve().parent
 OUTPUT_DIR = BASE_DIR / "../data/ner"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-animals = ["cat", "dog", "horse", "cow", "spider", "elephant", "butterfly", "chicken", "sheep", "squirrel"]
+animals = ["cat", "dog", "horse", "cow", "spider", "elephant",
+           "butterfly", "chicken", "sheep", "squirrel"]
 
 # Positive templates (structured)
 templates_positive = [
@@ -66,6 +76,7 @@ templates_negative = [
 ]
 
 def generate_sample(idx, templates):
+    """Generate a single NER sample."""
     animal = random.choice(animals)
     template = templates[idx % len(templates)]
     remove_punctuation = random.choice([0, 1])
@@ -75,13 +86,14 @@ def generate_sample(idx, templates):
     tags = ["B-ANIMAL" if re.sub(r'[^\w\s]', '', token) == animal else "O" for token in sentence]
     return {"tokens": sentence, "ner_tags": tags}
 
-# ========== GENERATION FUNCTION ==========
+
 def make_samples(
-    num_positive=200, 
-    num_varied=100, 
-    num_negation=200, 
+    num_positive=200,
+    num_varied=100,
+    num_negation=200,
     num_negative=50
 ):
+    """Generate samples for NER dataset."""
     data = []
 
     # --- Positive samples ---
@@ -105,13 +117,15 @@ def make_samples(
 
 # ========== MAIN ==========
 def main():
+    """Generate and save NER dataset."""
+    log_as_json("Starting NER data generation")
     all_data = make_samples()
     split_idx = int(0.8 * len(all_data))
     train, val = all_data[:split_idx], all_data[split_idx:]
 
-    with open(OUTPUT_DIR / "train.json", "w") as f:
+    with open(OUTPUT_DIR / "train.json", "w", encoding="utf-8") as f:
         json.dump(train, f, indent=2)
-    with open(OUTPUT_DIR / "val.json", "w") as f:
+    with open(OUTPUT_DIR / "val.json", "w", encoding="utf-8") as f:
         json.dump(val, f, indent=2)
 
     print(f"✅ Generated {len(train)} train and {len(val)} val samples in {OUTPUT_DIR}/")

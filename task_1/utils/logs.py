@@ -1,3 +1,4 @@
+"""Utility functions for storing and loading logs."""
 import datetime
 import json
 import os
@@ -5,26 +6,21 @@ import os
 import numpy as np
 
 class CustomEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, np.ndarray):
-            return obj.tolist()
+    """Custom JSON encoder to handle numpy data types."""
+    def default(self, o):
+        if isinstance(o, np.ndarray):
+            return o.tolist()
 
-        if isinstance(obj, np.int64) or \
-            isinstance(obj, np.int32) or \
-            isinstance(obj, np.int16) or \
-            isinstance(obj, np.int8):
-            return int(obj)
+        if isinstance(o, (np.int64, np.int32, np.int16, np.int8)):
+            return int(o)
 
-        if isinstance(obj, np.float128) or \
-            isinstance(obj, np.float96) or \
-            isinstance(obj, np.float64) or \
-            isinstance(obj, np.float32) or \
-            isinstance(obj, np.float16):
-            return float(obj)
+        if isinstance(o, (np.float64, np.float32, np.float16)):
+            return float(o)
 
-        return json.JSONEncoder.default(self, obj)
+        return json.JSONEncoder.default(self, o)
 
 def store_logs(logs):
+    """Store logs in a JSON file with a timestamped filename."""
     folder_path = "logs"
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     file_path = os.path.join(folder_path, f"{timestamp}.json")
@@ -37,9 +33,9 @@ def store_logs(logs):
     print(f"Log was saved to {file_path}")
 
 def load_log(log_filename: str):
+    """Load logs from a specified JSON file."""
     folder_path = "logs"
     file_path = os.path.join(folder_path, log_filename)
 
     with open(file_path, "r", encoding="utf-8") as f:
         return json.load(f)
-

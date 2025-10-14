@@ -1,9 +1,12 @@
+"""Train a ResNet model on the Animals10 dataset."""
 from pathlib import Path
 import torch
-import torch.nn as nn
+from torch import nn
 from torch.utils.data import DataLoader
-from torchvision import datasets, transforms, models
+from torchvision import datasets, models
 from tqdm import tqdm
+
+from .preprocessing import transform
 
 # training parameters
 BASE_DIR = Path(__file__).resolve().parent
@@ -15,13 +18,6 @@ EPOCHS = 3
 LR = 1e-3
 NUM_CLASSES = 10
 
-# transforms
-transform = transforms.Compose([
-    transforms.Resize((224, 224)),
-    transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                         std=[0.229, 0.224, 0.225]) # why these numbers?
-])
 
 # dataset & dataloader
 dataset = datasets.ImageFolder(DATA_DIR, transform=transform)
@@ -34,14 +30,14 @@ criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=LR)
 
 # training loop
-device = "cuda" if torch.cuda.is_available() else "cpu"
-model.to(device)
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+model.to(DEVICE)
 
 for epoch in range(EPOCHS):
     model.train()
     total_loss = 0
     for images, labels in tqdm(train_loader):
-        images, labels = images.to(device), labels.to(device)
+        images, labels = images.to(DEVICE), labels.to(DEVICE)
         optimizer.zero_grad()
         out = model(images)
         loss = criterion(out, labels)

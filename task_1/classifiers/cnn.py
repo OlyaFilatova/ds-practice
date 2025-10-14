@@ -1,21 +1,24 @@
+"""Convolutional Neural Network classifier for MNIST-like data."""
 import numpy as np
-from classifiers.base import MnistClassifierInterface
 import torch
-import torch.nn as nn
+from torch import nn, optim
 import torch.nn.functional as F
-import torch.optim as optim
+
+from classifiers.base import MnistClassifierInterface
+from utils.response import format_response
 
 class CNNModel(nn.Module):
     """Convolutional Neural Network Model for MNIST-like data."""
     def __init__(self):
-        super(CNNModel, self).__init__()
-        self.conv1 = nn.Conv2d(1, 32, kernel_size=3, padding=1) 
+        super().__init__()
+        self.conv1 = nn.Conv2d(1, 32, kernel_size=3, padding=1)
         self.conv2 = nn.Conv2d(32, 64, kernel_size=3, padding=1)
         self.pool = nn.MaxPool2d(2, 2)
         self.fc1 = nn.Linear(64 * 7 * 7, 128)
         self.fc2 = nn.Linear(128, 10)
 
     def forward(self, x):
+        """Define the forward pass of the CNN model."""
         x = F.relu(self.conv1(x))
         x = self.pool(x)
         x = F.relu(self.conv2(x))
@@ -26,7 +29,22 @@ class CNNModel(nn.Module):
         return x
 
 class CnnMnistClassifier(MnistClassifierInterface):
-    """Convolutional Neural Network classifier for MNIST-like data."""
+    """
+    Convolutional Neural Network classifier for MNIST-like data.
+
+    Args:
+        lr (float, optional): Learning rate for the optimizer. Defaults to 0.001.
+        epochs (int, optional): Number of training epochs. Defaults to 3.
+        device (str, optional): Device to use for training (e.g., 'cuda' or 'cpu').
+            Defaults to None.
+
+    Example:
+        Input:
+            images = [array of shape (N, 28, 28)]
+            labels = [array of shape (N,)]
+        Output:
+            Trains the CNN model and returns predictions for test images.
+    """
     def __init__(self, lr=0.001, epochs=3, device=None):
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
         self.model = CNNModel().to(self.device)
@@ -40,46 +58,51 @@ class CnnMnistClassifier(MnistClassifierInterface):
             images = np.stack(images)
         images = images.reshape(-1, 1, 28, 28)
         x_tensor = torch.tensor(images, dtype=torch.float32, device=self.device)
-        y_tensor = torch.tensor(np.array(labels).astype(np.int64), dtype=torch.long, device=self.device) if labels is not None else None
+        y_tensor = torch.tensor(
+            np.array(labels).astype(np.int64),
+            dtype=torch.long,
+            device=self.device
+            ) if labels is not None else None
         return x_tensor, y_tensor
 
-    def train(self, images, labels):
+    def train(self, x_train, y_train):
         """
-        Train CNN on MNIST images and labels.
+        Train the CNN model on the provided dataset.
 
-        images: flattened array
+        Args:
+            x_train (list or np.ndarray): List of training images.
+            y_train (list or np.ndarray): Corresponding labels for the training images.
 
-        labels: array
+        Example:
+            Input:
+                x_train = [array of shape (N, 28, 28)]
+                y_train = [array of shape (N,)]
+            Output:
+                Trains the model for the specified number of epochs.
         """
         self.model.train()
-        x_tensor, y_tensor = self._prepare_tensor(images, labels)
-
-        for epoch in range(self.epochs):
+        for _ in range(self.epochs):
+            x_tensor, y_tensor = self._prepare_tensor(x_train, y_train)
             self.optimizer.zero_grad()
-            outputs = self.model(x_tensor)
-            loss = self.criterion(outputs, y_tensor)
+            output = self.model(x_tensor)
+            loss = self.criterion(output, y_tensor)
             loss.backward()
             self.optimizer.step()
-            print(f"Epoch [{epoch+1}/{self.epochs}], Loss: {loss.item():.4f}")
 
-    def predict(self, images):
+    def predict(self, x_test):
         """
         Predict MNIST digits and confidence for each image.
 
-        images: flattened array
+        x_test: flattened array
 
         Returns: {predictions, confidences}
         """
         self.model.eval()
-        x_tensor, _ = self._prepare_tensor(images)
+        x_tensor, _ = self._prepare_tensor(x_test)
 
         with torch.no_grad():
             logits = self.model(x_tensor)
             probs = F.softmax(logits, dim=1)
             confidences, preds = torch.max(probs, dim=1)
-        
-        return [
-            { "prediction": prediction,  "confidence": confidence} 
-            for prediction, confidence in 
-                list(zip(preds.cpu().numpy(), confidences.cpu().numpy()))
-        ]
+
+        return format_response(preds.cpu().numpy(), confidences.cpu().numpy())

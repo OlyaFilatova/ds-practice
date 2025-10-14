@@ -1,5 +1,17 @@
+"""Infer animal entities from text using a trained NER model."""
 from pathlib import Path
+import re
+import logging
+import json
+
 from transformers import AutoTokenizer, AutoModelForTokenClassification, pipeline
+
+# Replace logging with structured JSON logging
+logging.basicConfig(level=logging.INFO, format='%(message)s')
+
+def log_as_json(message, **kwargs):
+    """Log messages in JSON format."""
+    logging.info(json.dumps({"message": message, **kwargs}))
 
 BASE_DIR = Path(__file__).resolve().parent
 
@@ -15,10 +27,25 @@ ANIMAL_LIST = [
 ]
 
 def extract_animals(text: str):
-    """Return a list of detected animals with token positions"""
+    """
+    Extract animal entities from the given text.
+
+    Args:
+        text (str): Input text to analyze.
+
+    Returns:
+        tuple: A tuple containing tokens (list of str) and detected animals (list of dict).
+
+    Example:
+        Input:
+            text = "There is a cow in the picture."
+        Output:
+            (["There", "is", "a", "cow", "in", "the", "picture, "."], [{"word": "cow", "index": 3}])
+    """
+    log_as_json("Extracting animals", text=text)
     entities = ner_pipeline(text)
     results = []
-    tokens = text.split()
+    tokens = re.findall(r"\w+|[^\w\s]", text, re.UNICODE)
     for ent in entities:
         word = ent["word"].lower()
         for animal in ANIMAL_LIST:
@@ -28,13 +55,10 @@ def extract_animals(text: str):
                 except ValueError:
                     idx = 0
                 results.append({"word": animal, "index": idx})
+    log_as_json("Extracted animals", text=text, tokens=tokens, results=results)
     return tokens, results
 
 if __name__ == "__main__":
-    text = "This is not a cow"
-    tokens, animals = extract_animals(text)
-    print(tokens, animals)
+    print(extract_animals("This is not a cow"))
 
-    text = "There is a cow in the picture."
-    tokens, animals = extract_animals(text)
-    print(tokens, animals)
+    print(extract_animals("There is a cow in the picture."))

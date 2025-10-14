@@ -1,3 +1,4 @@
+"""Utility functions for negation detection in text."""
 NEGATION_WORDS = {"not", "no", "n't", "without", "never", "none", "nothing"}
 
 def is_negated(tokens, entity_idx, window=5):
@@ -8,4 +9,3 @@ def is_negated(tokens, entity_idx, window=5):
     start = max(0, entity_idx - window)
     context = tokens[start:entity_idx]
     return any(word.lower() in NEGATION_WORDS for word in context)
-

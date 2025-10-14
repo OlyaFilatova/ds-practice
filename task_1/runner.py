@@ -1,8 +1,13 @@
-from utils.logs import store_logs
-from utils.metrics.accuracy import accuracy
+"""Runner for training and evaluating the MNIST classifier."""
+import hashlib
+import json
+from utils.metrics.accuracy import evaluate_model
+from utils.logs import CustomEncoder, store_logs
 from wrapper.mnist_classifier import Algorithm, MnistClassifier
 
+
 def run(algorithm: Algorithm, training, test):
+    """Run the training and evaluation process."""
     print("creating classifier")
     classifier = MnistClassifier(algorithm)
 
@@ -15,20 +20,20 @@ def run(algorithm: Algorithm, training, test):
     print('result')
     print(res)
 
-    metric_accuracy, expected_n_predicted = accuracy(test[1], [item['prediction'] for item in res])
+    metrics = evaluate_model(
+        [int(label) for label in test[1]],
+        [int(item['prediction']) for item in res]
+    )
 
-    print('Expected vs. Predicted')
-    print(expected_n_predicted)
-
-    print(f'Accuracy {metric_accuracy}%')
+    print('metrics')
+    print(json.dumps(metrics, indent=4))
 
     logs = {
+        "hash": hashlib.sha256((
+            json.dumps((tuple(training[2]), tuple(test[2])), cls=CustomEncoder).encode('utf-8')
+        )).hexdigest(),
         "algorithm": algorithm,
-        # "note": "", # Put a note here if there are any changes to the algorithm or hyperparams.
-        # Alternative approach would be saving each experiment as a commit. This way we can track how code changes affect models' performance.
-        "metrics": {
-            "accuracy": metric_accuracy
-        },
+        "metrics": metrics,
         "samples": [{
             "correct": int(item["prediction"]) == int(test[1][idx]),
             "prediction": item["prediction"],

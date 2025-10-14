@@ -1,11 +1,18 @@
+"""Train a NER model to identify animal names in text."""
 import json
+import logging
 from pathlib import Path
 from datasets import Dataset
 from transformers import AutoTokenizer, AutoModelForTokenClassification, Trainer, TrainingArguments
 
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(message)s')
+
 BASE_DIR = Path(__file__).resolve().parent
-with open(BASE_DIR / "../data/ner/train.json") as f: train_data = json.load(f)
-with open(BASE_DIR / "../data/ner/val.json") as f: val_data = json.load(f)
+with open(BASE_DIR / "../data/ner/train.json", encoding="utf-8") as f:
+    train_data = json.load(f)
+with open(BASE_DIR / "../data/ner/val.json", encoding="utf-8") as f:
+    val_data = json.load(f)
 
 train_dataset = Dataset.from_list(train_data)
 val_dataset = Dataset.from_list(val_data)
@@ -16,7 +23,13 @@ id2label = {i:l for l,i in label2id.items()}
 
 tokenizer = AutoTokenizer.from_pretrained("bert-base-cased")
 
+def log_as_json(message, **kwargs):
+    """Log messages in JSON format."""
+    logging.info(json.dumps({"message": message, **kwargs}))
+
 def tokenize_and_align_labels(examples):
+    """Tokenize input texts and align NER labels with tokenized outputs."""
+    log_as_json("Tokenizing and aligning labels", num_examples=len(examples["tokens"]))
     tokenized_inputs = tokenizer(
         examples["tokens"],
         is_split_into_words=True,

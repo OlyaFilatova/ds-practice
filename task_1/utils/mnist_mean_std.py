@@ -1,3 +1,4 @@
+"""Calculate and print the mean and standard deviation of the MNIST dataset."""
 from torchvision import datasets, transforms
 import torch
 

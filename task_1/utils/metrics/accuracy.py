@@ -1,11 +1,24 @@
-def accuracy(expected, predicted):
-    paired = list(zip(
-        [int(label) for label in expected],
-        [int(item) for item in predicted]
-    ))
+from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score
 
-    verified = [int(pair[0]) == int(pair[1]) for pair in paired]
-    
-    accuracy = (len([item for item in verified if item]) / len(verified)) * 100
+def evaluate_model(y_true, y_pred):
+    """
+    Evaluate the model's performance using precision, recall, f1-score, and accuracy.
 
-    return accuracy, paired
+    Args:
+        y_true (list): True labels.
+        y_pred (list): Predicted labels.
+
+    Returns:
+        dict: A dictionary containing precision, recall, f1-score, and accuracy.
+    """
+    precision = precision_score(y_true, y_pred, average='weighted')
+    recall = recall_score(y_true, y_pred, average='weighted')
+    f1 = f1_score(y_true, y_pred, average='weighted')
+    accuracy = accuracy_score(y_true, y_pred)
+
+    return {
+        "precision": precision,
+        "recall": recall,
+        "f1_score": f1,
+        "accuracy": accuracy
+    }

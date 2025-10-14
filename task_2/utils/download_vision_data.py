@@ -1,7 +1,9 @@
+"""Download and prepare the Animals10 dataset from Kaggle."""
+import os
 from pathlib import Path
 import shutil
+
 import kagglehub
-import os
 
 # Download latest version
 path = kagglehub.dataset_download("alessiocorrado99/animals10")
