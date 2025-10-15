@@ -17,11 +17,12 @@ class RandomForestMnistClassifier(MnistClassifierInterface):
         max_depth (int, optional): Maximum depth of the trees. Defaults to 5.
         random_state (int, optional): Random seed for reproducibility. Defaults to 42.
     """
-    def __init__(self, n_estimators=100, max_depth=5, random_state=42):
+    def __init__(self, n_estimators=500, max_depth=20, random_state=42):
         self.model = RandomForestClassifier(
             n_estimators=n_estimators,
             max_depth=max_depth,
-            random_state=random_state
+            random_state=random_state,
+            n_jobs=-1
         )
 
     def train(self, x_train, y_train):
