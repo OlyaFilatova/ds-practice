@@ -1,15 +1,14 @@
-"""Generate synthetic NER data with various templates and structures."""
+"""Generate synthetic NER data with various templates and structures (improved)."""
 import json
 import logging
 import random
 from pathlib import Path
 import re
 
-# Replace logging with structured JSON logging
+# Structured JSON logging
 logging.basicConfig(level=logging.INFO, format='%(message)s')
 
 def log_as_json(message, **kwargs):
-    """Log messages in JSON format."""
     logging.info(json.dumps({"message": message, **kwargs}))
 
 # ========== CONFIG ==========
@@ -17,10 +16,12 @@ BASE_DIR = Path(__file__).resolve().parent
 OUTPUT_DIR = BASE_DIR / "../data/ner"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-animals = ["cat", "dog", "horse", "cow", "spider", "elephant",
-           "butterfly", "chicken", "sheep", "squirrel"]
+animals = [
+    "cat", "dog", "horse", "cow", "spider", "elephant",
+    "butterfly", "chicken", "sheep", "squirrel"
+]
 
-# Positive templates (structured)
+# --- Templates ---
 templates_positive = [
     "There is a {} in the picture.",
     "I see a {}.",
@@ -28,27 +29,14 @@ templates_positive = [
     "This is a {}.",
     "Can you find the {}?",
     "Is that a {}?",
-    "I believe this is a {}.",
     "Looks like a {} to me.",
     "Could it be a {}?",
     "The photo shows a {}."
 ]
 
-# Off-template / varied phrasing
-templates_varied = [
-    "a {}.",
-    "the {}.",
-    "{}.",
-    "Look, a {} over there!",
-    "I think I see a {}",
-    "Could that be a {} in the field?",
-    "Maybe this is a {}?",
-    "Is it possible that it's a {}?",
-    "I spotted a {} somewhere.",
-    "Seems like a {} is around.",
-    "Check out that {}!",
-    "Do you see the {} there?",
-    "That appears to be a {}."
+# Very short templates (1-3 words) for improving short sentence recognition
+templates_short = [
+    "{}", "a {}", "the {}", "Look, a {}!", "Not a {}.", "No {} here."
 ]
 
 # Negation templates
@@ -60,9 +48,7 @@ templates_negation = [
     "There is no {} here.",
     "It isn't a {}.",
     "Never saw a {}.",
-    "Not a {} in sight.",
-    "Without a {}.",
-    "No {} can be found."
+    "Not a {} in sight."
 ]
 
 # Negative templates (no animal)
@@ -75,51 +61,75 @@ templates_negative = [
     "The photo shows buildings, not animals."
 ]
 
-def generate_sample(idx, templates):
-    """Generate a single NER sample."""
-    animal = random.choice(animals)
-    template = templates[idx % len(templates)]
-    remove_punctuation = random.choice([0, 1])
-    sentence = template.format(animal)
-    sentence = re.sub(r'[^\w\s]', '', sentence) if remove_punctuation else sentence
-    sentence = re.findall(r"\w+|[^\w\s]", sentence, re.UNICODE)
-    tags = ["B-ANIMAL" if re.sub(r'[^\w\s]', '', token) == animal else "O" for token in sentence]
-    return {"tokens": sentence, "ner_tags": tags}
+# -----------------------------
+# Helper functions
+# -----------------------------
+def random_capitalize(word):
+    """Randomly capitalize the word for augmentation."""
+    return word.upper() if random.random() < 0.2 else word
 
+def tokenize_sentence(sentence):
+    """Split sentence into tokens, preserving punctuation."""
+    return re.findall(r"\w+|[^\w\s]", sentence, re.UNICODE)
+
+def generate_sample(template_list, label_animal=True):
+    """Generate a single NER sample from a template list."""
+    template = random.choice(template_list)
+    animal = random.choice(animals)
+    sentence = template.format(animal)
+
+    # Randomly remove or keep punctuation
+    if random.random() < 0.3:
+        sentence = re.sub(r'[^\w\s]', '', sentence)
+
+    # Tokenize
+    tokens = tokenize_sentence(sentence)
+    tokens = [random_capitalize(t) for t in tokens]
+
+    # Assign labels
+    if label_animal:
+        tags = ["B-ANIMAL" if t.lower() == animal else "O" for t in tokens]
+    else:
+        tags = ["O"] * len(tokens)
+
+    return {"tokens": tokens, "ner_tags": tags}
 
 def make_samples(
     num_positive=200,
-    num_varied=100,
+    num_short=100,
     num_negation=200,
     num_negative=50
 ):
     """Generate samples for NER dataset."""
     data = []
 
-    # --- Positive samples ---
-    for idx in range(num_positive):
-        data.append(generate_sample(idx, templates_positive))
+    # Positive sentences
+    for _ in range(num_positive):
+        data.append(generate_sample(templates_positive))
 
-    # --- Varied/off-template samples ---
-    for idx in range(num_varied):
-        data.append(generate_sample(idx, templates_varied))
+    # Short templates
+    for _ in range(num_short):
+        data.append(generate_sample(templates_short))
 
-    # --- Negation samples ---
-    for idx in range(num_negation):
-        data.append(generate_sample(idx, templates_negation))
+    # Negation sentences
+    for _ in range(num_negation):
+        data.append(generate_sample(templates_negation))
 
-    # --- Negative samples (no animal) ---
-    for idx in range(num_negative):
-        data.append(generate_sample(idx, templates_negative))
+    # Negative sentences (no animal)
+    for _ in range(num_negative):
+        data.append(generate_sample(templates_negative, label_animal=False))
 
     random.shuffle(data)
     return data
 
-# ========== MAIN ==========
+# -----------------------------
+# MAIN
+# -----------------------------
 def main():
-    """Generate and save NER dataset."""
     log_as_json("Starting NER data generation")
     all_data = make_samples()
+
+    # Split into train/val
     split_idx = int(0.8 * len(all_data))
     train, val = all_data[:split_idx], all_data[split_idx:]
 

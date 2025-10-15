@@ -71,6 +71,10 @@ def verify_text_image_claim(text: str, image_path: str):
 if __name__ == "__main__":
     # Examples
     verify_text_image_claim("There is a horse in the picture.", "test_images/horse/0001.jpeg")
+    print("-"*40)
     verify_text_image_claim("not a dog", "test_images/cow/0001.jpeg")
+    print("-"*40)
     verify_text_image_claim("I don't think it's a sheep", "test_images/dog/0001.jpeg")
+    print("-"*40)
     verify_text_image_claim("Look, a cat over there!", "test_images/cat/0001.jpeg")
+    print("-"*40)
