@@ -122,12 +122,15 @@ class FnnMnistClassifier(MnistClassifierInterface):
         x_tensor, _ = self._prepare_tensor(x_test)
         loader = DataLoader(x_tensor, batch_size=self.batch_size)
         self.model.eval()
-        preds = []
+        all_predictions = []
+        all_confidences = []
         with torch.no_grad():
             for xb in loader:
                 xb = xb.to(self.device)
                 logits = self.model(xb)
                 probs = F.softmax(logits, dim=1)
-                confidences, preds = torch.max(probs, dim=1)
+                conf, pred = torch.max(probs, dim=1)
+                all_predictions.extend(pred.cpu().numpy())
+                all_confidences.extend(conf.cpu().numpy())
 
-        return format_response(preds.cpu().numpy(), confidences.cpu().numpy())
+        return format_response(all_predictions, all_confidences)

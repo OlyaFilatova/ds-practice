@@ -17,9 +17,6 @@ def run(algorithm: Algorithm, training, test):
     print('predicting')
     res = classifier.predict(test[0])
 
-    print('result')
-    print(res)
-
     metrics = evaluate_model(
         [int(label) for label in test[1]],
         [int(item['prediction']) for item in res]
