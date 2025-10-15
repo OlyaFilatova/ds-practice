@@ -16,7 +16,7 @@ BASE_DIR = Path(__file__).resolve().parent
 MODEL_PATH = BASE_DIR / "../models/vision/model_resnet_animals.pth"
 
 # load model
-model = models.resnet18(pretrained=False)
+model = models.resnet18(weights=None)
 model.fc = torch.nn.Linear(model.fc.in_features, len(CLASS_NAMES))
 model.load_state_dict(torch.load(MODEL_PATH, map_location="cpu"))
 model.eval()
@@ -53,4 +53,4 @@ def classify_animal(image_path: str):
     return CLASS_NAMES[pred]
 
 if __name__ == "__main__":
-    print(classify_animal("test_images/dog/0003.jpeg"))
+    print(classify_animal("test_images/squirrel/0001.jpeg"))
