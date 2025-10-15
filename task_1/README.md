@@ -59,7 +59,7 @@ print(f"Predictions: {predictions}")
 
 Follow these steps to set up and run the project:
 
-1. **Install Python 3**: Ensure Python 3 is installed on your system.
+1. **Install Python 3**: Ensure Python3 (<3.12) is installed on your system.
 
 2. **Clone the repository**
    ```bash

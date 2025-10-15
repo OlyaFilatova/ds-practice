@@ -1,6 +1,8 @@
 """Base classifier interface for MNIST-like data."""
 from abc import ABC, abstractmethod
 
+from utils.response import Response
+
 
 class MnistClassifierInterface(ABC):
     """Classifier interface for MNIST-like data."""
@@ -15,7 +17,7 @@ class MnistClassifierInterface(ABC):
         """
 
     @abstractmethod
-    def predict(self, x_test):
+    def predict(self, x_test) -> list[Response]:
         """
         Predict MNIST digits and confidence for each image.
 

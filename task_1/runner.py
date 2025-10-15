@@ -32,7 +32,7 @@ def run(algorithm: Algorithm, training, test):
         "hash": hashlib.sha256((
             json.dumps((tuple(training[2]), tuple(test[2])), cls=CustomEncoder).encode('utf-8')
         )).hexdigest(),
-        "algorithm": algorithm,
+        "algorithm": algorithm.value,
         "metrics": metrics,
         "samples": [{
             "correct": int(item["prediction"]) == int(test[1][idx]),

@@ -33,4 +33,4 @@ def main(algorithm: Algorithm, train_size=30000, test_size=10):
 
 
 if __name__ == "__main__":
-    main(Algorithm.RF.value)
+    main(Algorithm.CNN)

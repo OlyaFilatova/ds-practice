@@ -54,7 +54,7 @@ print(result)  # True or False
 
 Follow these steps to set up and run the project:
 
-1. **Install Python 3**: Ensure Python 3 is installed on your system.
+1. **Install Python 3**: Ensure Python3 (<3.12) is installed on your system.
 
 1. **Clone the repository**
 	```bash
@@ -71,6 +71,11 @@ Follow these steps to set up and run the project:
 1. **Install dependencies**
 	```bash
 	pip install -r requirements.txt
+	```
+
+1. **Add the venv as a new kernel**
+	```
+	python -m ipykernel install --user --name=project_env --display-name "Python (project_env)"
 	```
 
 1. **Ensure model files are present**

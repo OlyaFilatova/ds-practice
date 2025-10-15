@@ -15,15 +15,16 @@ class Algorithm(enum.Enum):
 class MnistClassifier:
     """Wrapper class for different MNIST classification algorithms."""
     def __init__(self, algorithm: Algorithm): # cnn, rf, and nn
-        mapping: dict[Algorithm, MnistClassifierInterface] = {
-            "cnn": CnnMnistClassifier,
-            "nn": FnnMnistClassifier,
-            "rf": RandomForestMnistClassifier
+        mapping: dict[Algorithm, type[MnistClassifierInterface]] = {
+            Algorithm.CNN: CnnMnistClassifier,
+            Algorithm.FNN: FnnMnistClassifier,
+            Algorithm.RF: RandomForestMnistClassifier
         }
 
         if algorithm not in mapping:
             raise ValueError(f'Received unexpected algorithm name "{algorithm}".\
-                              Pass one of the following: {", ".join(mapping.keys())}')
+                              Pass one of the following: \
+                             {", ".join(str(key) for key in mapping.keys())}')
 
         model_class = mapping[algorithm]
         self.model = model_class()
