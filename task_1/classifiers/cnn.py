@@ -3,28 +3,39 @@ import numpy as np
 import torch
 from torch import nn, optim
 import torch.nn.functional as F
+from torchvision import transforms
 
 from classifiers.base import MnistClassifierInterface
 from utils.response import format_response
+
+# Augmentation transform for training
+train_transform = transforms.Compose([
+    transforms.RandomRotation(10),
+    transforms.RandomAffine(0, translate=(0.1, 0.1)),
+])
 
 class CNNModel(nn.Module):
     """Convolutional Neural Network Model for MNIST-like data."""
     def __init__(self):
         super().__init__()
         self.conv1 = nn.Conv2d(1, 32, kernel_size=3, padding=1)
+        self.bn1 = nn.BatchNorm2d(32)
         self.conv2 = nn.Conv2d(32, 64, kernel_size=3, padding=1)
+        self.bn2 = nn.BatchNorm2d(64)
         self.pool = nn.MaxPool2d(2, 2)
+        self.dropout = nn.Dropout(0.5)
         self.fc1 = nn.Linear(64 * 7 * 7, 128)
         self.fc2 = nn.Linear(128, 10)
 
     def forward(self, x):
         """Define the forward pass of the CNN model."""
-        x = F.relu(self.conv1(x))
+        x = F.relu(self.bn1(self.conv1(x)))
         x = self.pool(x)
-        x = F.relu(self.conv2(x))
+        x = F.relu(self.bn2(self.conv2(x)))
         x = self.pool(x)
-        x = x.view(x.size(0), -1)
+        x = torch.flatten(x, 1)
         x = F.relu(self.fc1(x))
+        x = self.dropout(x)
         x = self.fc2(x)
         return x
 
@@ -45,24 +56,40 @@ class CnnMnistClassifier(MnistClassifierInterface):
         Output:
             Trains the CNN model and returns predictions for test images.
     """
-    def __init__(self, lr=0.001, epochs=3, device=None):
+    def __init__(self, lr=0.001, epochs=10, device=None, class_weights=None):
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
         self.model = CNNModel().to(self.device)
         self.epochs = epochs
         self.optimizer = optim.Adam(self.model.parameters(), lr=lr)
-        self.criterion = nn.CrossEntropyLoss()
+        if class_weights is not None:
+            weights_tensor = torch.tensor(class_weights, dtype=torch.float32, device=self.device)
+            self.criterion = nn.CrossEntropyLoss(weight=weights_tensor)
+        else:
+            self.criterion = nn.CrossEntropyLoss()
+        # MNIST mean/std normalization
+        self.mean = 0.1307
+        self.std = 0.3081
 
-    def _prepare_tensor(self, images, labels=None):
-        """Convert Python lists or numpy arrays to Torch tensors."""
+    def _prepare_tensor(self, images, labels=None, augment=False):
+        """Convert lists/arrays to tensors, normalize, optionally apply augmentation."""
         if isinstance(images, list):
             images = np.stack(images)
-        images = images.reshape(-1, 1, 28, 28)
+        images = images.reshape(-1, 1, 28, 28).astype(np.float32) / 255.0
+        if augment:
+            # Apply augmentation per image
+            augmented = []
+            for img in images:
+                img_tensor = torch.tensor(img, dtype=torch.float32).unsqueeze(0)
+                img_aug = train_transform(img_tensor)
+                augmented.append(img_aug.squeeze(0).numpy())
+            images = np.stack(augmented)
+        # Standardize
+        images = (images - self.mean) / self.std
         x_tensor = torch.tensor(images, dtype=torch.float32, device=self.device)
-        y_tensor = torch.tensor(
-            np.array(labels).astype(np.int64),
-            dtype=torch.long,
-            device=self.device
-            ) if labels is not None else None
+        y_tensor = None
+        if labels is not None:
+            y_tensor = torch.tensor(np.array(labels).astype(np.int64),
+                                    dtype=torch.long, device=self.device)
         return x_tensor, y_tensor
 
     def train(self, x_train, y_train):
@@ -80,12 +107,12 @@ class CnnMnistClassifier(MnistClassifierInterface):
             Output:
                 Trains the model for the specified number of epochs.
         """
-        self.model.train()
         for _ in range(self.epochs):
-            x_tensor, y_tensor = self._prepare_tensor(x_train, y_train)
+            self.model.train()
+            x_tensor, y_tensor = self._prepare_tensor(x_train, y_train, augment=True)
             self.optimizer.zero_grad()
-            output = self.model(x_tensor)
-            loss = self.criterion(output, y_tensor)
+            logits = self.model(x_tensor)
+            loss = self.criterion(logits, y_tensor)
             loss.backward()
             self.optimizer.step()
 

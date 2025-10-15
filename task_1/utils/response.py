@@ -1,11 +1,11 @@
 """Utility functions for formatting model responses."""
 from typing import TypedDict
 
-class Response(TypedDict):
+class PredictResponse(TypedDict):
     prediction: int
     confidence: float
 
-def format_response(predictions: list[int], confidences: list[float]) -> list[Response]:
+def format_response(predictions: list[int], confidences: list[float]) -> list[PredictResponse]:
     """
     Format the predictions into a standardized response structure.
 

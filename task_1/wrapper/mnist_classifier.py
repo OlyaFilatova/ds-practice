@@ -24,7 +24,7 @@ class MnistClassifier:
         if algorithm not in mapping:
             raise ValueError(f'Received unexpected algorithm name "{algorithm}".\
                               Pass one of the following: \
-                             {", ".join(str(key) for key in mapping.keys())}')
+                             {", ".join(str(key) for key in mapping)}')
 
         model_class = mapping[algorithm]
         self.model = model_class()

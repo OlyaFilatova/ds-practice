@@ -7,7 +7,7 @@ from runner import run
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
-def main(algorithm: Algorithm, train_size=30000, test_size=10):
+def main(algorithm: Algorithm, train_size=50000, test_size=10000):
     """
     Main function to initialize the dataset and run the specified algorithm.
 
