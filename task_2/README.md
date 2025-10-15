@@ -93,7 +93,7 @@ Follow these steps to set up and run the project:
             python utils/download_vision_data.py
             python vision/train.py
 			```
-        - the pretrained vision model can be downloaded from https://drive.google.com/file/d/1IGw28vx8NhbAhXf0bghXybFt-MAjFfxE/view?usp=drive_link
+        - the pretrained vision model can be downloaded from https://drive.google.com/file/d/1bM5q0OR6AFkQO3hqLOJLnHYf7jtC_-OX/view?usp=sharing
 
 1. **Running the pipeline**
 	```python
