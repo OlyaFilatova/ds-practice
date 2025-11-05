@@ -34,8 +34,8 @@ val_dataset = Dataset.from_list(val_data)
 # Labels
 # -----------------------------
 label_list = ["O", "B-ANIMAL"]
-label2id = {l: i for i, l in enumerate(label_list)}
-id2label = {i: l for l, i in label2id.items()}
+label2id = {label: i for i, label in enumerate(label_list)}
+id2label = {i: label for label, i in label2id.items()}
 
 # -----------------------------
 # Tokenizer
@@ -97,9 +97,9 @@ def compute_metrics(p):
     labels = p.label_ids
     preds_list, labels_list = [], []
 
-    for l, p_ in zip(labels, preds):
+    for label, p_ in zip(labels, preds):
         l_new, p_new = [], []
-        for ll, pp in zip(l, p_):
+        for ll, pp in zip(label, p_):
             if ll != -100:
                 l_new.append(id2label[ll])
                 p_new.append(id2label[pp])
