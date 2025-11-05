@@ -1,12 +1,15 @@
 """Calculate and print the mean and standard deviation of the MNIST dataset."""
-from torchvision import datasets, transforms
+
 import torch
+from torchvision import datasets, transforms
 
 train_dataset = datasets.MNIST(
-    './data', train=True, download=True, transform=transforms.ToTensor()
+    "./data", train=True, download=True, transform=transforms.ToTensor()
 )
 
-loader = torch.utils.data.DataLoader(train_dataset, batch_size=len(train_dataset))
+loader = torch.utils.data.DataLoader(
+    train_dataset, batch_size=len(train_dataset)
+)
 data = next(iter(loader))
 images, labels = data
 

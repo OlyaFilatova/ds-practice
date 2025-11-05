@@ -1,4 +1,5 @@
 """Convolutional Neural Network classifier for MNIST-like data."""
+
 import numpy as np
 import torch
 from torch import nn, optim
@@ -9,13 +10,17 @@ from classifiers.base import MnistClassifierInterface
 from utils.response import format_response
 
 # Augmentation transform for training
-train_transform = transforms.Compose([
-    transforms.RandomRotation(10),
-    transforms.RandomAffine(0, translate=(0.1, 0.1)),
-])
+train_transform = transforms.Compose(
+    [
+        transforms.RandomRotation(10),
+        transforms.RandomAffine(0, translate=(0.1, 0.1)),
+    ]
+)
+
 
 class CNNModel(nn.Module):
     """Convolutional Neural Network Model for MNIST-like data."""
+
     def __init__(self):
         super().__init__()
         self.conv1 = nn.Conv2d(1, 32, kernel_size=3, padding=1)
@@ -39,6 +44,7 @@ class CNNModel(nn.Module):
         x = self.fc2(x)
         return x
 
+
 class CnnMnistClassifier(MnistClassifierInterface):
     """
     Convolutional Neural Network classifier for MNIST-like data.
@@ -56,13 +62,18 @@ class CnnMnistClassifier(MnistClassifierInterface):
         Output:
             Trains the CNN model and returns predictions for test images.
     """
+
     def __init__(self, lr=0.001, epochs=10, device=None, class_weights=None):
-        self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
+        self.device = device or (
+            "cuda" if torch.cuda.is_available() else "cpu"
+        )
         self.model = CNNModel().to(self.device)
         self.epochs = epochs
         self.optimizer = optim.Adam(self.model.parameters(), lr=lr)
         if class_weights is not None:
-            weights_tensor = torch.tensor(class_weights, dtype=torch.float32, device=self.device)
+            weights_tensor = torch.tensor(
+                class_weights, dtype=torch.float32, device=self.device
+            )
             self.criterion = nn.CrossEntropyLoss(weight=weights_tensor)
         else:
             self.criterion = nn.CrossEntropyLoss()
@@ -79,17 +90,24 @@ class CnnMnistClassifier(MnistClassifierInterface):
             # Apply augmentation per image
             augmented = []
             for img in images:
-                img_tensor = torch.tensor(img, dtype=torch.float32).unsqueeze(0)
+                img_tensor = torch.tensor(img, dtype=torch.float32).unsqueeze(
+                    0
+                )
                 img_aug = train_transform(img_tensor)
                 augmented.append(img_aug.squeeze(0).numpy())
             images = np.stack(augmented)
         # Standardize
         images = (images - self.mean) / self.std
-        x_tensor = torch.tensor(images, dtype=torch.float32, device=self.device)
+        x_tensor = torch.tensor(
+            images, dtype=torch.float32, device=self.device
+        )
         y_tensor = None
         if labels is not None:
-            y_tensor = torch.tensor(np.array(labels).astype(np.int64),
-                                    dtype=torch.long, device=self.device)
+            y_tensor = torch.tensor(
+                np.array(labels).astype(np.int64),
+                dtype=torch.long,
+                device=self.device,
+            )
         return x_tensor, y_tensor
 
     def train(self, x_train, y_train):
@@ -109,7 +127,9 @@ class CnnMnistClassifier(MnistClassifierInterface):
         """
         for _ in range(self.epochs):
             self.model.train()
-            x_tensor, y_tensor = self._prepare_tensor(x_train, y_train, augment=True)
+            x_tensor, y_tensor = self._prepare_tensor(
+                x_train, y_train, augment=True
+            )
             self.optimizer.zero_grad()
             logits = self.model(x_tensor)
             loss = self.criterion(logits, y_tensor)

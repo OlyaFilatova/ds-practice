@@ -1,4 +1,5 @@
 """Wrapper for different MNIST classification algorithms."""
+
 import enum
 
 from classifiers.base import MnistClassifierInterface
@@ -6,19 +7,23 @@ from classifiers.cnn import CnnMnistClassifier
 from classifiers.feed_forward_nn import FnnMnistClassifier
 from classifiers.random_forest import RandomForestMnistClassifier
 
+
 class Algorithm(enum.Enum):
     """Supported classification algorithms."""
-    CNN = 'cnn'
-    FNN = 'nn'
-    RF = 'rf'
+
+    CNN = "cnn"
+    FNN = "nn"
+    RF = "rf"
+
 
 class MnistClassifier:
     """Wrapper class for different MNIST classification algorithms."""
-    def __init__(self, algorithm: Algorithm): # cnn, rf, and nn
+
+    def __init__(self, algorithm: Algorithm):  # cnn, rf, and nn
         mapping: dict[Algorithm, type[MnistClassifierInterface]] = {
             Algorithm.CNN: CnnMnistClassifier,
             Algorithm.FNN: FnnMnistClassifier,
-            Algorithm.RF: RandomForestMnistClassifier
+            Algorithm.RF: RandomForestMnistClassifier,
         }
 
         if algorithm not in mapping:

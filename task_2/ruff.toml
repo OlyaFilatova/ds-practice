@@ -1,0 +1,61 @@
+# Ruff configuration file - PEP-8 compliant
+# This file is used when pyproject.toml is not available
+
+# PEP-8 standard line length
+line-length = 79
+
+# Set target Python version
+target-version = "py311"
+
+# PEP-8 recommends 4 spaces for indentation
+indent-width = 4
+
+[lint]
+# Enable PEP-8 compliance rules
+select = [
+    "E",    # pycodestyle errors
+    "F",    # Pyflakes
+    "W",    # pycodestyle warnings
+    "I",    # isort
+    "N",    # pep8-naming
+    "C90",  # mccabe complexity
+    "UP",   # pyupgrade
+]
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".git",
+    ".ruff_cache",
+    ".venv",
+    "__pycache__",
+    "data",
+    "models", 
+    "test_images",
+]
+
+# McCabe complexity threshold (PEP-8 recommends keeping functions simple)
+mccabe = { max-complexity = 10 }
+
+[lint.per-file-ignores]
+# Allow longer lines in test files for assertions
+"**/test_*.py" = ["E501"]
+"**/tests/*.py" = ["E501"]
+
+[lint.isort]
+# PEP-8 compatible import sorting
+known-first-party = ["utils", "classifiers", "wrapper"]
+force-single-line = false
+force-sort-within-sections = true
+
+[lint.pep8-naming]
+# Enforce PEP-8 naming conventions
+classmethod-decorators = ["classmethod"]
+
+[format]
+# PEP-8 compliant formatting
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"

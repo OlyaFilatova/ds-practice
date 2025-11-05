@@ -1,17 +1,19 @@
 """Train a NER model to identify animal names in text."""
+
 import json
 import logging
 from pathlib import Path
+
 from datasets import Dataset
+from seqeval.metrics import f1_score, precision_score, recall_score
 from transformers import (
-    AutoTokenizer,
     AutoModelForTokenClassification,
+    AutoTokenizer,
     Trainer,
     TrainingArguments,
 )
-from seqeval.metrics import f1_score, precision_score, recall_score
 
-logging.basicConfig(level=logging.INFO, format='%(message)s')
+logging.basicConfig(level=logging.INFO, format="%(message)s")
 
 BASE_DIR = Path(__file__).resolve().parent
 train_file = BASE_DIR / "../data/ner/train.json"
@@ -40,6 +42,7 @@ id2label = {i: l for l, i in label2id.items()}
 # -----------------------------
 tokenizer = AutoTokenizer.from_pretrained("distilbert-base-cased")
 
+
 # -----------------------------
 # Tokenize & align labels
 # -----------------------------
@@ -49,11 +52,16 @@ def tokenize_and_align_labels(examples):
         is_split_into_words=True,
         padding=True,
         truncation=True,
-        max_length=128
+        max_length=128,
     )
 
     labels = []
-    for i, word_ids in enumerate(map(tokenized_inputs.word_ids, range(len(tokenized_inputs["input_ids"])))):
+    for i, word_ids in enumerate(
+        map(
+            tokenized_inputs.word_ids,
+            range(len(tokenized_inputs["input_ids"])),
+        )
+    ):
         label_ids = []
         for word_idx in word_ids:
             if word_idx is None:
@@ -66,6 +74,7 @@ def tokenize_and_align_labels(examples):
     tokenized_inputs["labels"] = labels
     return tokenized_inputs
 
+
 train_dataset = train_dataset.map(tokenize_and_align_labels, batched=True)
 val_dataset = val_dataset.map(tokenize_and_align_labels, batched=True)
 
@@ -76,8 +85,9 @@ model = AutoModelForTokenClassification.from_pretrained(
     "distilbert-base-cased",
     num_labels=len(label_list),
     id2label=id2label,
-    label2id=label2id
+    label2id=label2id,
 )
+
 
 # -----------------------------
 # Compute metrics for entity-level F1
@@ -99,8 +109,9 @@ def compute_metrics(p):
     return {
         "precision": precision_score(labels_list, preds_list),
         "recall": recall_score(labels_list, preds_list),
-        "f1": f1_score(labels_list, preds_list)
+        "f1": f1_score(labels_list, preds_list),
     }
+
 
 # -----------------------------
 # Training arguments
@@ -118,7 +129,7 @@ training_args = TrainingArguments(
     logging_steps=50,
     load_best_model_at_end=True,  # Early stopping based on eval F1
     metric_for_best_model="f1",
-    greater_is_better=True
+    greater_is_better=True,
 )
 
 # -----------------------------
@@ -130,7 +141,7 @@ trainer = Trainer(
     train_dataset=train_dataset,
     eval_dataset=val_dataset,
     tokenizer=tokenizer,
-    compute_metrics=compute_metrics
+    compute_metrics=compute_metrics,
 )
 
 # -----------------------------

@@ -1,4 +1,5 @@
 """Download and prepare the Animals10 dataset from Kaggle."""
+
 import os
 from pathlib import Path
 import shutil
@@ -28,7 +29,7 @@ translate = {
     "mucca": "cow",
     "pecora": "sheep",
     "scoiattolo": "squirrel",
-    "ragno": "spider"
+    "ragno": "spider",
 }
 
 for directory in os.listdir(target_dir):

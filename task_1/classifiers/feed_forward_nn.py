@@ -1,21 +1,26 @@
 """Feed-Forward Neural Network classifier for MNIST-like data."""
+
 import logging
+
+import numpy as np
 import torch
 from torch import nn
 import torch.nn.functional as F
 from torch.utils.data import DataLoader, TensorDataset
 from torchvision import transforms
-import numpy as np
 
 from classifiers.base import MnistClassifierInterface
 from utils.response import format_response
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
 
 
 class MNISTFFN(nn.Module):
     """Feed-Forward Neural Network Model for MNIST-like data."""
-    def __init__(self, input_dim=28*28, hidden_dims=None, num_classes=10):
+
+    def __init__(self, input_dim=28 * 28, hidden_dims=None, num_classes=10):
         super().__init__()
         hidden_dims = hidden_dims or [128, 64]
         layers = []
@@ -43,17 +48,19 @@ class FnnMnistClassifier(MnistClassifierInterface):
         device (str, optional): Device to use for training (e.g., 'cuda' or 'cpu').
             Defaults to None.
     """
+
     def __init__(self, lr=1e-3, epochs=5, batch_size=64, device=None):
-        self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
+        self.device = device or (
+            "cuda" if torch.cuda.is_available() else "cpu"
+        )
         self.model = MNISTFFN().to(self.device)
         self.optimizer = torch.optim.Adam(self.model.parameters(), lr=lr)
         self.epochs = epochs
         self.batch_size = batch_size
         self.criterion = nn.CrossEntropyLoss()
-        self.transform = transforms.Compose([
-            transforms.ToTensor(),
-            transforms.Normalize((0.1307,), (0.3081,))
-        ])
+        self.transform = transforms.Compose(
+            [transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))]
+        )
 
     def _prepare_tensor(self, images, labels=None):
         """Convert Python lists or numpy arrays to Torch tensors."""
@@ -61,10 +68,11 @@ class FnnMnistClassifier(MnistClassifierInterface):
             images = np.stack(images)
         images = np.expand_dims(images, 1)  # (N, 1, 28, 28)
         x_tensor = torch.tensor(images, dtype=torch.float32) / 255.0
-        y_tensor = torch.tensor(
-            np.array(labels).astype(np.int64),
-            dtype=torch.long
-        ) if labels is not None else None
+        y_tensor = (
+            torch.tensor(np.array(labels).astype(np.int64), dtype=torch.long)
+            if labels is not None
+            else None
+        )
         return x_tensor, y_tensor
 
     def train(self, x_train, y_train):
@@ -84,7 +92,9 @@ class FnnMnistClassifier(MnistClassifierInterface):
         """
         logging.info("Training Feed-Forward NN with %d samples", len(x_train))
         dataset = TensorDataset(*self._prepare_tensor(x_train, y_train))
-        dataloader = DataLoader(dataset, batch_size=self.batch_size, shuffle=True)
+        dataloader = DataLoader(
+            dataset, batch_size=self.batch_size, shuffle=True
+        )
         self.model.train()
         for epoch in range(self.epochs):
             total_loss, correct = 0, 0
@@ -104,10 +114,10 @@ class FnnMnistClassifier(MnistClassifierInterface):
             acc = correct / len(dataset)
             logging.info(
                 "Epoch %d/%d | Loss: %.4f | Acc: %.4f",
-                epoch+1,
+                epoch + 1,
                 self.epochs,
                 avg_loss,
-                acc
+                acc,
             )
 
     def predict(self, x_test):
@@ -118,7 +128,9 @@ class FnnMnistClassifier(MnistClassifierInterface):
 
         Returns: {predictions, confidences}
         """
-        logging.info("Predicting with Feed-Forward NN on %d samples", len(x_test))
+        logging.info(
+            "Predicting with Feed-Forward NN on %d samples", len(x_test)
+        )
         x_tensor, _ = self._prepare_tensor(x_test)
         loader = DataLoader(x_tensor, batch_size=self.batch_size)
         self.model.eval()
