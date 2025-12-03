@@ -64,7 +64,7 @@ Follow these steps to set up and run the project:
 2. **Clone the repository**
    ```bash
    git clone https://github.com/OlyaFilatova/ds-practice.git
-   cd ds-practice/task_1
+   cd ds-practice/task_1_classifiers
    ```
 
 3. **Create and activate a virtual environment**
