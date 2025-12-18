@@ -1,0 +1,348 @@
+- [ ] go through steps described on the getting-started/quickstart page
+- [ ] go through steps described in the dagster-basics-tutorial
+
+- [ ] https://docs.dagster.io/guides/build
+    - [ ] https://docs.dagster.io/guides/build/projects
+    - [ ] https://docs.dagster.io/guides/build/projects/creating-projects
+    - [ ] https://docs.dagster.io/guides/build/projects/project-structure
+    - [ ] https://docs.dagster.io/guides/build/projects/project-structure/project-overview
+    - [ ] https://docs.dagster.io/guides/build/projects/project-structure/organizing-dagster-projects
+    - [ ] https://docs.dagster.io/guides/build/projects/workspaces
+    - [ ] https://docs.dagster.io/guides/build/projects/workspaces/creating-workspaces
+    - [ ] https://docs.dagster.io/guides/build/projects/workspaces/dg-toml
+    - [ ] https://docs.dagster.io/guides/build/projects/workspaces/workspace-yaml
+    - [ ] https://docs.dagster.io/guides/build/projects/dagster-plus-project-history
+    - [ ] https://docs.dagster.io/guides/build/projects/moving-to-components
+    - [ ] https://docs.dagster.io/guides/build/projects/moving-to-components/migrating-project
+    - [ ] https://docs.dagster.io/guides/build/projects/moving-to-components/migrating-definitions
+    - [ ] https://docs.dagster.io/guides/build/projects/moving-to-components/adding-components-to-existing-project
+    - [ ] https://docs.dagster.io/guides/build/assets
+    - [ ] https://docs.dagster.io/guides/build/assets/defining-assets
+    - [ ] https://docs.dagster.io/guides/build/assets/defining-assets-with-asset-dependencies
+    - [ ] https://docs.dagster.io/guides/build/assets/passing-data-between-assets
+    - [ ] https://docs.dagster.io/guides/build/assets/configuring-assets
+    - [ ] https://docs.dagster.io/guides/build/assets/creating-asset-factories
+    - [ ] https://docs.dagster.io/guides/build/assets/defining-dependencies-with-asset-factories
+    - [ ] https://docs.dagster.io/guides/build/assets/external-assets
+    - [ ] https://docs.dagster.io/guides/build/assets/metadata-and-tags
+    - [ ] https://docs.dagster.io/guides/build/assets/metadata-and-tags/tags
+    - [ ] https://docs.dagster.io/guides/build/assets/metadata-and-tags/kind-tags
+    - [ ] https://docs.dagster.io/guides/build/assets/metadata-and-tags/table-metadata
+    - [ ] https://docs.dagster.io/guides/build/assets/metadata-and-tags/column-level-lineage
+    - [ ] https://docs.dagster.io/guides/build/assets/metadata-and-tags/asset-observations
+    - [ ] https://docs.dagster.io/guides/build/assets/metadata-and-tags/adding-attributes-to-assets
+    - [ ] https://docs.dagster.io/guides/build/assets/metadata-and-tags/asset-facets
+    - [ ] https://docs.dagster.io/guides/build/assets/asset-selection-syntax
+    - [ ] https://docs.dagster.io/guides/build/assets/asset-selection-syntax/reference
+    - [ ] https://docs.dagster.io/guides/build/assets/asset-selection-syntax/examples
+    - [ ] https://docs.dagster.io/guides/build/assets/asset-versioning-and-caching
+    - [ ] https://docs.dagster.io/guides/build/assets/graph-backed-assets
+    - [ ] https://docs.dagster.io/guides/build/components
+    - [ ] https://docs.dagster.io/guides/build/components/building-pipelines-with-components
+    - [ ] https://docs.dagster.io/guides/build/components/building-pipelines-with-components/adding-component-definitions
+    - [ ] https://docs.dagster.io/guides/build/components/building-pipelines-with-components/using-partitions
+    - [ ] https://docs.dagster.io/guides/build/components/building-pipelines-with-components/using-template-variables
+    - [ ] https://docs.dagster.io/guides/build/components/building-pipelines-with-components/using-template-udfs
+    - [ ] https://docs.dagster.io/guides/build/components/building-pipelines-with-components/post-processing-components
+    - [ ] https://docs.dagster.io/guides/build/components/building-pipelines-with-components/testing-component-definitions
+    - [ ] https://docs.dagster.io/guides/build/components/building-pipelines-with-components/python-script-component-tutorial
+    - [ ] https://docs.dagster.io/guides/build/components/creating-new-components
+    - [ ] https://docs.dagster.io/guides/build/components/creating-new-components/creating-and-registering-a-component
+    - [ ] https://docs.dagster.io/guides/build/components/creating-new-components/component-customization
+    - [ ] https://docs.dagster.io/guides/build/components/creating-new-components/creating-an-inline-component
+    - [ ] https://docs.dagster.io/guides/build/components/creating-new-components/subclassing-components
+    - [ ] https://docs.dagster.io/guides/build/components/creating-new-components/testing-your-component
+    - [ ] https://docs.dagster.io/guides/build/components/using-environment-variables-in-components
+    - [ ] https://docs.dagster.io/guides/build/components/asset-factories-to-components
+    - [ ] https://docs.dagster.io/guides/build/components/state-backed-components
+    - [ ] https://docs.dagster.io/guides/build/components/state-backed-components/configuring-state-backed-components
+    - [ ] https://docs.dagster.io/guides/build/components/state-backed-components/managing-state-in-ci-cd
+    - [ ] https://docs.dagster.io/guides/build/components/state-backed-components/configuring-versioned-state-storage
+    - [ ] https://docs.dagster.io/guides/build/partitions-and-backfills
+    - [ ] https://docs.dagster.io/guides/build/partitions-and-backfills/partitioning-assets
+    - [ ] https://docs.dagster.io/guides/build/partitions-and-backfills/defining-dependencies-between-partitioned-assets
+    - [ ] https://docs.dagster.io/guides/build/partitions-and-backfills/backfilling-data
+    - [ ] https://docs.dagster.io/guides/build/partitions-and-backfills/partitioning-ops
+    - [ ] https://docs.dagster.io/guides/build/external-resources
+    - [ ] https://docs.dagster.io/guides/build/external-resources/defining-resources
+    - [ ] https://docs.dagster.io/guides/build/external-resources/configuring-resources
+    - [ ] https://docs.dagster.io/guides/build/external-resources/using-resources
+    - [ ] https://docs.dagster.io/guides/build/external-resources/connecting-to-databases
+    - [ ] https://docs.dagster.io/guides/build/external-resources/connecting-to-apis
+    - [ ] https://docs.dagster.io/guides/build/external-resources/testing-configurable-resources
+    - [ ] https://docs.dagster.io/guides/build/external-resources/using-bare-python-objects-as-resources
+    - [ ] https://docs.dagster.io/guides/build/external-resources/managing-resource-state
+    - [ ] https://docs.dagster.io/guides/build/external-pipelines
+    - [ ] https://docs.dagster.io/guides/build/external-pipelines/using-dagster-pipes
+    - [ ] https://docs.dagster.io/guides/build/external-pipelines/using-dagster-pipes/create-subprocess-asset
+    - [ ] https://docs.dagster.io/guides/build/external-pipelines/using-dagster-pipes/modify-external-code
+    - [ ] https://docs.dagster.io/guides/build/external-pipelines/using-dagster-pipes/reference
+    - [ ] https://docs.dagster.io/guides/build/external-pipelines/javascript-pipeline
+    - [ ] https://docs.dagster.io/guides/build/external-pipelines/aws
+    - [ ] https://docs.dagster.io/guides/build/external-pipelines/aws/aws-ecs-pipeline
+    - [ ] https://docs.dagster.io/guides/build/external-pipelines/aws/aws-emr-containers-pipeline
+    - [ ] https://docs.dagster.io/guides/build/external-pipelines/aws/aws-emr-pipeline
+    - [ ] https://docs.dagster.io/guides/build/external-pipelines/aws/aws-emr-serverless-pipeline
+    - [ ] https://docs.dagster.io/guides/build/external-pipelines/aws/aws-glue-pipeline
+    - [ ] https://docs.dagster.io/guides/build/external-pipelines/aws/aws-lambda-pipeline
+    - [ ] https://docs.dagster.io/guides/build/external-pipelines/azureml-pipeline
+    - [ ] https://docs.dagster.io/guides/build/external-pipelines/gcp-dataproc-pipeline
+    - [ ] https://docs.dagster.io/guides/build/external-pipelines/databricks-pipeline
+    - [ ] https://docs.dagster.io/guides/build/external-pipelines/spark-databricks-connect-pipeline
+    - [ ] https://docs.dagster.io/guides/build/external-pipelines/kubernetes-pipeline
+    - [ ] https://docs.dagster.io/guides/build/external-pipelines/pyspark-pipeline
+    - [ ] https://docs.dagster.io/guides/build/external-pipelines/scalaspark-pipeline
+    - [ ] https://docs.dagster.io/guides/build/external-pipelines/migrating-from-step-launchers-to-pipes
+    - [ ] https://docs.dagster.io/guides/build/external-pipelines/dagster-pipes-details-and-customization
+    - [ ] https://docs.dagster.io/guides/build/io-managers
+    - [ ] https://docs.dagster.io/guides/build/io-managers/defining-a-custom-io-manager
+    - [ ] https://docs.dagster.io/guides/build/ml-pipelines
+    - [ ] https://docs.dagster.io/guides/build/ml-pipelines/managing-ml
+    - [ ] https://docs.dagster.io/guides/build/ml-pipelines/ml-pipeline
+    - [ ] https://docs.dagster.io/guides/build/ops
+    - [ ] https://docs.dagster.io/guides/build/ops/op-events
+    - [ ] https://docs.dagster.io/guides/build/ops/op-hooks
+    - [ ] https://docs.dagster.io/guides/build/ops/op-retries
+    - [ ] https://docs.dagster.io/guides/build/ops/graphs
+    - [ ] https://docs.dagster.io/guides/build/ops/nesting-graphs
+    - [ ] https://docs.dagster.io/guides/build/ops/dynamic-graphs
+    - [ ] https://docs.dagster.io/guides/build/jobs
+    - [ ] https://docs.dagster.io/guides/build/jobs/asset-jobs
+    - [ ] https://docs.dagster.io/guides/build/jobs/op-jobs
+    - [ ] https://docs.dagster.io/guides/build/jobs/job-execution
+    - [ ] https://docs.dagster.io/guides/build/jobs/unconnected-inputs
+    - [ ] https://docs.dagster.io/guides/build/jobs/using-jobs
+- [ ] https://docs.dagster.io/guides/automate
+    - [ ] https://docs.dagster.io/guides/automate/schedules
+    - [ ] https://docs.dagster.io/guides/automate/schedules/defining-schedules
+    - [ ] https://docs.dagster.io/guides/automate/schedules/configuring-job-behavior
+    - [ ] https://docs.dagster.io/guides/automate/schedules/using-schedules
+    - [ ] https://docs.dagster.io/guides/automate/schedules/customizing-execution-timezone
+    - [ ] https://docs.dagster.io/guides/automate/schedules/constructing-schedules-for-partitioned-assets-and-jobs
+    - [ ] https://docs.dagster.io/guides/automate/schedules/using-resources-in-schedules
+    - [ ] https://docs.dagster.io/guides/automate/schedules/testing-schedules
+    - [ ] https://docs.dagster.io/guides/automate/schedules/troubleshooting-schedules
+    - [ ] https://docs.dagster.io/guides/automate/declarative-automation
+    - [ ] https://docs.dagster.io/guides/automate/declarative-automation/customizing-automation-conditions
+    - [ ] https://docs.dagster.io/guides/automate/declarative-automation/customizing-automation-conditions/customizing-on-cron-condition
+    - [ ] https://docs.dagster.io/guides/automate/declarative-automation/customizing-automation-conditions/customizing-on-missing-condition
+    - [ ] https://docs.dagster.io/guides/automate/declarative-automation/customizing-automation-conditions/customizing-eager-condition
+    - [ ] https://docs.dagster.io/guides/automate/declarative-automation/customizing-automation-conditions/describing-conditions-with-labels
+    - [ ] https://docs.dagster.io/guides/automate/declarative-automation/customizing-automation-conditions/arbitrary-python-automation-conditions
+    - [ ] https://docs.dagster.io/guides/automate/declarative-automation/automating-asset-checks
+    - [ ] https://docs.dagster.io/guides/automate/declarative-automation/automation-condition-sensors
+    - [ ] https://docs.dagster.io/guides/automate/declarative-automation/automation-condition-reference
+    - [ ] https://docs.dagster.io/guides/automate/sensors
+    - [ ] https://docs.dagster.io/guides/automate/sensors/using-resources-in-sensors
+    - [ ] https://docs.dagster.io/guides/automate/sensors/logging-in-sensors
+    - [ ] https://docs.dagster.io/guides/automate/sensors/using-sensors
+    - [ ] https://docs.dagster.io/guides/automate/sensors/testing-sensors
+    - [ ] https://docs.dagster.io/guides/automate/sensors/monitoring-sensors-in-the-dagster-ui
+    - [ ] https://docs.dagster.io/guides/automate/sensors/run-status-sensors
+    - [ ] https://docs.dagster.io/guides/automate/sensors/testing-run-status-sensors
+    - [ ] https://docs.dagster.io/guides/automate/asset-sensors
+- [ ] https://docs.dagster.io/guides/operate
+    - [ ] https://docs.dagster.io/guides/operate/configuration
+    - [ ] https://docs.dagster.io/guides/operate/configuration/run-configuration
+    - [ ] https://docs.dagster.io/guides/operate/configuration/advanced-config-types
+    - [ ] https://docs.dagster.io/guides/operate/configuration/using-environment-variables-and-secrets
+    - [ ] https://docs.dagster.io/guides/operate/webserver
+    - [ ] https://docs.dagster.io/guides/operate/ui-user-settings
+    - [ ] https://docs.dagster.io/guides/operate/run-executors
+    - [ ] https://docs.dagster.io/guides/operate/managing-concurrency
+    - [ ] https://docs.dagster.io/guides/operate/dev-to-prod
+- [ ] https://docs.dagster.io/guides/log-debug
+    - [ ] https://docs.dagster.io/guides/log-debug/logging
+    - [ ] https://docs.dagster.io/guides/log-debug/logging/custom-logging
+    - [ ] https://docs.dagster.io/guides/log-debug/logging/python-logging
+    - [ ] https://docs.dagster.io/guides/log-debug/debugging
+    - [ ] https://docs.dagster.io/guides/log-debug/debugging/debugging-pdb
+- [ ] https://docs.dagster.io/guides/observe
+    - [ ] https://docs.dagster.io/guides/observe/asset-catalog
+    - [ ] https://docs.dagster.io/guides/observe/asset-catalog/dashboards
+    - [ ] https://docs.dagster.io/guides/observe/alerts
+    - [ ] https://docs.dagster.io/guides/observe/alerts/configuring-an-alert-notification-service
+    - [ ] https://docs.dagster.io/guides/observe/alerts/creating-alerts
+    - [ ] https://docs.dagster.io/guides/observe/alerts/alert-policy-types
+    - [ ] https://docs.dagster.io/guides/observe/alerts/example-config
+    - [ ] https://docs.dagster.io/guides/observe/asset-health-status
+    - [ ] https://docs.dagster.io/guides/observe/asset-freshness-policies
+    - [ ] https://docs.dagster.io/guides/observe/insights
+    - [ ] https://docs.dagster.io/guides/observe/insights/asset-metadata
+    - [ ] https://docs.dagster.io/guides/observe/insights/export-metrics
+    - [ ] https://docs.dagster.io/guides/observe/insights/snowflake
+    - [ ] https://docs.dagster.io/guides/observe/insights/google-bigquery
+- [ ] https://docs.dagster.io/guides/test
+    - [ ] https://docs.dagster.io/guides/test/asset-checks
+    - [ ] https://docs.dagster.io/guides/test/running-a-subset-of-asset-checks
+    - [ ] https://docs.dagster.io/guides/test/data-freshness-testing
+    - [ ] https://docs.dagster.io/guides/test/unit-testing-assets-and-ops
+    - [ ] https://docs.dagster.io/guides/test/testing-partitioned-config-and-jobs
+    - [ ] https://docs.dagster.io/guides/test/data-contracts
+
+- [ ] https://docs.dagster.io/about/community
+- [ ] https://docs.dagster.io/about/contributing
+- [ ] https://docs.dagster.io/about/releases
+- [ ] https://docs.dagster.io/about/telemetry
+- [ ] https://docs.dagster.io/about/changelog
+- [ ] https://courses.dagster.io/
+    - [ ] Dagster & ETL
+    - [ ] Dagster essentials
+    - [ ] Dagster & dbt
+    - [ ] Testing with Dagster
+
+- [ ] https://dagster.io/blog/a-look-inside-dagster-labs-culture
+- [ ] https://dagster.io/blog/a-practical-guide-to-dagster-resources
+- [ ] https://dagster.io/blog/accelerate-data-pipeline-development-with-dagster-components
+- [ ] https://dagster.io/blog/adding-python-types
+- [ ] https://dagster.io/blog/ai-and-data-engineering-roles
+- [ ] https://dagster.io/blog/ai-engineering-is-data-engineering
+- [ ] https://dagster.io/blog/ai-reference-architectures
+- [ ] https://dagster.io/blog/annoucing-etl-with-dagster
+- [ ] https://dagster.io/blog/announcing-dagster-day
+- [ ] https://dagster.io/blog/announcing-dagster-university
+- [ ] https://dagster.io/blog/backfills-in-ml
+- [ ] https://dagster.io/blog/balancing-the-data-scales-centralization-vs-decentralization
+- [ ] https://dagster.io/blog/beyond-point-to-point
+- [ ] https://dagster.io/blog/bridging-high-code-and-low-code
+- [ ] https://dagster.io/blog/building-a-better-lakehouse-from-airflow-to-dagster
+- [ ] https://dagster.io/blog/building-ai-products-that-scale
+- [ ] https://dagster.io/blog/building-better-analytics-pipelines
+- [ ] https://dagster.io/blog/building-cost-effective-ai-pipelines-openai-langchain-dagster
+- [ ] https://dagster.io/blog/building-with-dagster-vs-airflow
+- [ ] https://dagster.io/blog/change-tracking-branch-deployments-in-dagster-plus
+- [ ] https://dagster.io/blog/chatgpt-langchain
+- [ ] https://dagster.io/blog/code-location-best-practices
+- [ ] https://dagster.io/blog/compass-now-available
+- [ ] https://dagster.io/blog/content-style-guide
+- [ ] https://dagster.io/blog/dagster-1-0-hello
+- [ ] https://dagster.io/blog/dagster-1-1-thank-u-next
+- [ ] https://dagster.io/blog/dagster-1-10-mambo-no-5
+- [ ] https://dagster.io/blog/dagster-1-11-build-me-up-buttercup
+- [ ] https://dagster.io/blog/dagster-1-12-monster-mash
+- [ ] https://dagster.io/blog/dagster-1-2-formation
+- [ ] https://dagster.io/blog/dagster-1-3-smooth-operator
+- [ ] https://dagster.io/blog/dagster-1-4-material-girl
+- [ ] https://dagster.io/blog/dagster-1-5-how-will-i-know
+- [ ] https://dagster.io/blog/dagster-1-6-back-to-black
+- [ ] https://dagster.io/blog/dagster-1-7-love-plus-one
+- [ ] https://dagster.io/blog/dagster-1-8-call-me-maybe
+- [ ] https://dagster.io/blog/dagster-1-9-spooky
+- [ ] https://dagster.io/blog/dagster-airflow
+- [ ] https://dagster.io/blog/dagster-asset-checks
+- [ ] https://dagster.io/blog/dagster-atlan-integration
+- [ ] https://dagster.io/blog/dagster-cloud-ga-launch
+- [ ] https://dagster.io/blog/dagster-code-locations
+- [ ] https://dagster.io/blog/dagster-components-ga
+- [ ] https://dagster.io/blog/dagster-crash-course-oct-2022
+- [ ] https://dagster.io/blog/dagster-debugging
+- [ ] https://dagster.io/blog/dagster-dlt
+- [ ] https://dagster.io/blog/dagster-embedded-elt
+- [ ] https://dagster.io/blog/dagster-escaping-the-modern-data-trap
+- [ ] https://dagster.io/blog/dagster-external-assets
+- [ ] https://dagster.io/blog/dagster-fabric
+- [ ] https://dagster.io/blog/dagster-five-stages-development-lifecycle
+- [ ] https://dagster.io/blog/dagster-google-sheets-tutorial
+- [ ] https://dagster.io/blog/dagster-insights
+- [ ] https://dagster.io/blog/dagster-labs-retain-ai
+- [ ] https://dagster.io/blog/dagster-master-plan
+- [ ] https://dagster.io/blog/dagster-ml-pipelines
+- [ ] https://dagster.io/blog/dagster-openai
+- [ ] https://dagster.io/blog/dagster-pipes
+- [ ] https://dagster.io/blog/dagster-plus-calatog-a-new-built-in-asset-library
+- [ ] https://dagster.io/blog/dagster-plus-now-available-in-the-eu
+- [ ] https://dagster.io/blog/dagster-power-bi
+- [ ] https://dagster.io/blog/dagster-sigma
+- [ ] https://dagster.io/blog/dagster-university-presents-testing-with-dagster
+- [ ] https://dagster.io/blog/dagsters-mcp-server
+- [ ] https://dagster.io/blog/data-catalog
+- [ ] https://dagster.io/blog/data-engineering-in-python
+- [ ] https://dagster.io/blog/data-platform-week-2024
+- [ ] https://dagster.io/blog/data-visibility-primer
+- [ ] https://dagster.io/blog/dbt-docs-on-react
+- [ ] https://dagster.io/blog/dbt-fusion-support-comes-to-dagster
+- [ ] https://dagster.io/blog/decade-of-data
+- [ ] https://dagster.io/blog/decade-of-data-engineering
+- [ ] https://dagster.io/blog/deepdive-recap-building-a-true-data-platform
+- [ ] https://dagster.io/blog/deepdive-recap-dagster-modal
+- [ ] https://dagster.io/blog/deepdive-recap-data-reliability
+- [ ] https://dagster.io/blog/deepdive-recap-evolution-data-platform
+- [ ] https://dagster.io/blog/designing-user-friendly-dagster-components
+- [ ] https://dagster.io/blog/dsls-to-the-rescue
+- [ ] https://dagster.io/blog/duckdb-data-lake
+- [ ] https://dagster.io/blog/dynamic-partitioning
+- [ ] https://dagster.io/blog/elementl-series-b
+- [ ] https://dagster.io/blog/elt-options-in-dagster
+- [ ] https://dagster.io/blog/ensuring-data-quality-with-dagster-and-great-expectations
+- [ ] https://dagster.io/blog/ensuring-reliable-data-dagster-plus
+- [ ] https://dagster.io/blog/expanding-dagsters-embedded-elt-ecosystem-with-dlthub-for-data-ingestion
+- [ ] https://dagster.io/blog/fake-stars
+- [ ] https://dagster.io/blog/fast-deploys-with-pex-and-docker
+- [ ] https://dagster.io/blog/free-your-mind-with-dagster
+- [ ] https://dagster.io/blog/how-compass-turns-questions-into-queries
+- [ ] https://dagster.io/blog/how-dagster-labs-runs-dagster
+- [ ] https://dagster.io/blog/how-to-structure-your-dagster-project
+- [ ] https://dagster.io/blog/impedance-mismatch-in-data-orchestration
+- [ ] https://dagster.io/blog/interactive-debugging-with-dagster-and-docker
+- [ ] https://dagster.io/blog/introducing-compass
+- [ ] https://dagster.io/blog/introducing-dagster-cloud
+- [ ] https://dagster.io/blog/introducing-dagster-labs
+- [ ] https://dagster.io/blog/introducing-our-new-ebook-scaling-data-teams
+- [ ] https://dagster.io/blog/introducing-the-new-dagster-plus-ui
+- [ ] https://dagster.io/blog/moving-beyond-airflow-in-the-modern-data-stack
+- [ ] https://dagster.io/blog/new-standard-plans
+- [ ] https://dagster.io/blog/observability-that-matters-with-dagster-alerts
+- [ ] https://dagster.io/blog/open-core-business-model-dagster
+- [ ] https://dagster.io/blog/orchestrating-dbt-with-dagster
+- [ ] https://dagster.io/blog/orchestrating-nanochat-building-the-tokenizer
+- [ ] https://dagster.io/blog/orchestrating-nanochat-training-the-models
+- [ ] https://dagster.io/blog/outbound-reporting-pipeline
+- [ ] https://dagster.io/blog/partitioned-data-pipelines
+- [ ] https://dagster.io/blog/pedram-why-i-joined-dagster-labs
+- [ ] https://dagster.io/blog/pete-hunt-path-to-elementl
+- [ ] https://dagster.io/blog/pete-hunt-path-to-elementl-part2
+- [ ] https://dagster.io/blog/pipes-typescript-rust-java
+- [ ] https://dagster.io/blog/podcast-drill-to-detail-aug-2023
+- [ ] https://dagster.io/blog/poor-mans-datalake-motherduck
+- [ ] https://dagster.io/blog/product-and-code-quality
+- [ ] https://dagster.io/blog/productive-software-engineering
+- [ ] https://dagster.io/blog/python-breaking-packages
+- [ ] https://dagster.io/blog/python-ci-cd-automation
+- [ ] https://dagster.io/blog/python-environment-variables
+- [ ] https://dagster.io/blog/python-factory-patterns
+- [ ] https://dagster.io/blog/python-high-performance
+- [ ] https://dagster.io/blog/python-packages-primer-1
+- [ ] https://dagster.io/blog/python-packages-primer-2
+- [ ] https://dagster.io/blog/python-project-best-practices
+- [ ] https://dagster.io/blog/python-type-hinting
+- [ ] https://dagster.io/blog/python-write-audit-publish
+- [ ] https://dagster.io/blog/pythonic-config-and-resources
+- [ ] https://dagster.io/blog/rebundling-the-data-platform
+- [ ] https://dagster.io/blog/rise-of-the-data-platform-engineer
+- [ ] https://dagster.io/blog/scale-and-standardize-data-pipelines-with-dsl
+- [ ] https://dagster.io/blog/scaling-analysis-without-scaling-the-team
+- [ ] https://dagster.io/blog/scaling-dag-visualization
+- [ ] https://dagster.io/blog/see-the-forest-and-trees-dagster-plus
+- [ ] https://dagster.io/blog/skip-kafka-use-postgres-message-queue
+- [ ] https://dagster.io/blog/sling-out-your-etl-provider-with-embedded-elt
+- [ ] https://dagster.io/blog/smoke-test-data-pipeline
+- [ ] https://dagster.io/blog/soc2-compliance-dagster-blog
+- [ ] https://dagster.io/blog/software-defined-assets
+- [ ] https://dagster.io/blog/surfacing-errors
+- [ ] https://dagster.io/blog/the-data-engineering-lifecycle
+- [ ] https://dagster.io/blog/the-rise-of-medium-code
+- [ ] https://dagster.io/blog/thinking-in-assets
+- [ ] https://dagster.io/blog/training-llms
+- [ ] https://dagster.io/blog/unlocking-flexible-pipelines-customizing-asset-decorator
+- [ ] https://dagster.io/blog/untangling-python-packages-part-1
+- [ ] https://dagster.io/blog/untangling-python-packages-part-2
+- [ ] https://dagster.io/blog/updated-asset-selection-syntax
+- [ ] https://dagster.io/blog/vibe-coding-survival-guide
+- [ ] https://dagster.io/blog/web-workers-performance-issue
+- [ ] https://dagster.io/blog/what-copilot-wont-teach-you-about-python-part-1
+- [ ] https://dagster.io/blog/what-copilot-wont-teach-you-about-python-part-2
+- [ ] https://dagster.io/blog/what-dagster-believes-about-data-platforms
+- [ ] https://dagster.io/blog/what-is-dagster
+- [ ] https://dagster.io/blog/when-and-when-not-to-optimize-data-pipelines
+- [ ] https://dagster.io/blog/why-no-code-solutions-almost-always-fail
+- [ ] https://dagster.io/blog/why-we-love-uv

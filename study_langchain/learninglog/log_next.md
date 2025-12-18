@@ -1,0 +1,142 @@
+- langchain
+    - [ ] https://docs.langchain.com/oss/python/langchain/overview
+    - misc.
+        - [ ] https://docs.langchain.com/oss/python/langchain/get-help
+    - tutorials
+        - [ ] https://docs.langchain.com/oss/python/langchain/knowledge-base
+        - [ ] https://docs.langchain.com/oss/python/langchain/rag
+        - [ ] https://docs.langchain.com/oss/python/langchain/sql-agent
+        - [ ] https://docs.langchain.com/oss/python/langchain/supervisor
+        - [ ] https://docs.langchain.com/oss/python/langchain/voice-agent
+    - conceptual overview
+        - [ ] https://docs.langchain.com/oss/python/langchain/component-architecture
+        - [ ] https://docs.langchain.com/oss/python/concepts/memory
+        - [ ] https://docs.langchain.com/oss/python/concepts/context
+    - overview
+        - [ ] https://docs.langchain.com/oss/python/langchain/install
+        - [ ] https://docs.langchain.com/oss/python/langchain/quickstart
+        - [ ] https://docs.langchain.com/oss/python/releases/changelog
+        - [ ] https://docs.langchain.com/oss/python/langchain/philosophy
+    - core components
+        - [ ] https://docs.langchain.com/oss/python/langchain/agents
+        - [ ] https://docs.langchain.com/oss/python/langchain/models
+        - [ ] https://docs.langchain.com/oss/python/langchain/messages
+        - [ ] https://docs.langchain.com/oss/python/langchain/tools
+        - [ ] https://docs.langchain.com/oss/python/langchain/short-term-memory
+        - [ ] https://docs.langchain.com/oss/python/langchain/streaming
+        - [ ] https://docs.langchain.com/oss/python/langchain/structured-output
+    - middleware
+        - [ ] https://docs.langchain.com/oss/python/langchain/middleware/overview
+        - [ ] https://docs.langchain.com/oss/python/langchain/middleware/custom
+        - [ ] https://docs.langchain.com/oss/python/langchain/middleware/built-in
+    - advanced usage
+        - [ ] https://docs.langchain.com/oss/python/langchain/guardrails
+        - [ ] https://docs.langchain.com/oss/python/langchain/runtime
+        - [ ] https://docs.langchain.com/oss/python/langchain/context-engineering
+        - [ ] https://docs.langchain.com/oss/python/langchain/mcp
+        - [ ] https://docs.langchain.com/oss/python/langchain/human-in-the-loop
+        - [ ] https://docs.langchain.com/oss/python/langchain/multi-agent
+        - [ ] https://docs.langchain.com/oss/python/langchain/retrieval
+        - [ ] https://docs.langchain.com/oss/python/langchain/long-term-memory
+    - agent development
+        - [ ] https://docs.langchain.com/oss/python/langchain/studio
+        - [ ] https://docs.langchain.com/oss/python/langchain/test
+        - [ ] https://docs.langchain.com/oss/python/langchain/ui
+    - deploy with LangSmith
+        - [ ] https://docs.langchain.com/oss/python/langchain/deploy
+        - [ ] https://docs.langchain.com/oss/python/langchain/observability
+- deepagents
+    - [ ] https://docs.langchain.com/oss/python/deepagents/overview
+    - get started
+        - [ ] https://docs.langchain.com/oss/python/deepagents/quickstart
+        - [ ] https://docs.langchain.com/oss/python/deepagents/customization
+    - core capabilities
+        - [ ] https://docs.langchain.com/oss/python/deepagents/harness
+        - [ ] https://docs.langchain.com/oss/python/deepagents/backends
+        - [ ] https://docs.langchain.com/oss/python/deepagents/subagents
+        - [ ] https://docs.langchain.com/oss/python/deepagents/human-in-the-loop
+        - [ ] https://docs.langchain.com/oss/python/deepagents/long-term-memory
+        - [ ] https://docs.langchain.com/oss/python/deepagents/middleware
+    - command line interface
+        - [ ] https://docs.langchain.com/oss/python/deepagents/cli
+- integrations
+    - providers
+        - [ ] https://docs.langchain.com/oss/python/integrations/providers/overview
+        - [ ] https://docs.langchain.com/oss/python/integrations/providers/all_providers
+        - [ ] https://docs.langchain.com/oss/python/integrations/providers/anthropic
+        - [ ] https://docs.langchain.com/oss/python/integrations/providers/aws
+        - [ ] https://docs.langchain.com/oss/python/integrations/providers/google
+        - [ ] https://docs.langchain.com/oss/python/integrations/providers/huggingface
+        - [ ] https://docs.langchain.com/oss/python/integrations/providers/microsoft
+        - [ ] https://docs.langchain.com/oss/python/integrations/providers/ollama
+        - [ ] https://docs.langchain.com/oss/python/integrations/providers/openai
+    - by component
+        - [ ] https://docs.langchain.com/oss/python/integrations/chat
+        - [ ] https://docs.langchain.com/oss/python/integrations/chat/groq
+        - [ ] https://docs.langchain.com/oss/python/integrations/tools
+        - [ ] https://docs.langchain.com/oss/python/integrations/middleware
+        - [ ] https://docs.langchain.com/oss/python/integrations/retrievers
+        - [ ] https://docs.langchain.com/oss/python/integrations/splitters
+        - [ ] https://docs.langchain.com/oss/python/integrations/text_embedding
+        - [ ] https://docs.langchain.com/oss/python/integrations/vectorstores
+        - [ ] https://docs.langchain.com/oss/python/integrations/document_loaders
+        - [ ] https://docs.langchain.com/oss/python/integrations/stores
+- langgraph
+    - [ ] https://docs.langchain.com/oss/python/langgraph/overview
+    - tutorials
+        - [ ] https://docs.langchain.com/oss/python/langgraph/agentic-rag
+        - [ ] https://docs.langchain.com/oss/python/langgraph/sql-agent
+    - conceptual overview
+        - [ ] https://docs.langchain.com/oss/python/langgraph/functional-api
+        - [ ] https://docs.langchain.com/oss/python/langgraph/graph-api
+    - get started
+        - [ ] https://docs.langchain.com/oss/python/langgraph/install
+        - [ ] https://docs.langchain.com/oss/python/langgraph/quickstart
+        - [ ] https://docs.langchain.com/oss/python/langgraph/local-server
+        - [ ] https://docs.langchain.com/oss/python/langgraph/thinking-in-langgraph
+        - [ ] https://docs.langchain.com/oss/python/langgraph/workflows-agents
+    - capabilities
+        - [ ] https://docs.langchain.com/oss/python/langgraph/persistence
+        - [ ] https://docs.langchain.com/oss/python/langgraph/durable-execution
+        - [ ] https://docs.langchain.com/oss/python/langgraph/streaming
+        - [ ] https://docs.langchain.com/oss/python/langgraph/interrupts
+        - [ ] https://docs.langchain.com/oss/python/langgraph/use-time-travel
+        - [ ] https://docs.langchain.com/oss/python/langgraph/add-memory
+        - [ ] https://docs.langchain.com/oss/python/langgraph/use-subgraphs
+    - production
+        - [ ] https://docs.langchain.com/oss/python/langgraph/application-structure
+        - [ ] https://docs.langchain.com/oss/python/langgraph/test
+        - [ ] https://docs.langchain.com/oss/python/langgraph/studio
+        - [ ] https://docs.langchain.com/oss/python/langgraph/ui
+        - [ ] https://docs.langchain.com/oss/python/langgraph/deploy
+        - [ ] https://docs.langchain.com/oss/python/langgraph/observability
+    - graph api
+        - [ ] https://docs.langchain.com/oss/python/langgraph/choosing-apis
+        - [ ] https://docs.langchain.com/oss/python/langgraph/graph-api
+        - [ ] https://docs.langchain.com/oss/python/langgraph/use-graph-api
+    - functional api
+        - [ ] https://docs.langchain.com/oss/python/langgraph/use-functional-api
+    - misc.
+        - [ ] https://docs.langchain.com/oss/python/langgraph/case-studies
+        - [ ] https://docs.langchain.com/oss/python/langgraph/pregel
+- misc.
+    - [ ] https://docs.langchain.com/oss/python/learn
+    - [ ] https://docs.langchain.com/oss/python/migrate/langchain-v1
+    - [ ] https://docs.langchain.com/oss/python/migrate/langgraph-v1
+    - [ ] https://docs.langchain.com/oss/python/reference/overview
+    - [ ] https://docs.langchain.com/oss/python/release-policy
+    - [ ] https://docs.langchain.com/oss/python/releases/changelog
+    - [ ] https://docs.langchain.com/oss/python/releases/langchain-v1
+    - [ ] https://docs.langchain.com/oss/python/releases/langgraph-v1
+    - [ ] https://docs.langchain.com/oss/python/security-policy
+    - [ ] https://docs.langchain.com/oss/python/versioning
+    - [ ] https://docs.langchain.com/oss/python/common-errors
+- contributing
+    - [ ] https://docs.langchain.com/oss/python/contributing/code
+    - [ ] https://docs.langchain.com/oss/python/contributing/comarketing
+    - [ ] https://docs.langchain.com/oss/python/contributing/documentation
+    - [ ] https://docs.langchain.com/oss/python/contributing/implement-langchain
+    - [ ] https://docs.langchain.com/oss/python/contributing/integrations-langchain
+    - [ ] https://docs.langchain.com/oss/python/contributing/overview
+    - [ ] https://docs.langchain.com/oss/python/contributing/publish-langchain
+    - [ ] https://docs.langchain.com/oss/python/contributing/standard-tests-langchain
