@@ -1,5 +1,3 @@
-- [ ] https://docs.opencv.org/4.x/d1/dfb/intro.html
-- [ ] https://docs.opencv.org/4.x/d5/da3/tutorial_ios_install.html
 - [ ] https://docs.opencv.org/4.x/d7/d88/tutorial_hello.html
 - [ ] https://docs.opencv.org/4.x/d3/def/tutorial_image_manipulation.html
 - [ ] https://docs.opencv.org/4.x/db/dc8/tutorial_video_processing.html
